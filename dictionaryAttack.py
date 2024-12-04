@@ -1,10 +1,11 @@
 import hashlib
-from hashlib import blake2b
-userPassword = hashlib.sha256()
+userPassword256 = hashlib.sha256()
+userPassword512 = hashlib.sha256()
 
 userinput = input("Enter Password\nRestrictions - strictly composed of one to three words from the dictionary\nYour Password: ")
 print("Password is " + userinput)
-userPassword.update(b'userinput')
+userPassword256.update(b'userinput')
+userPassword512.update(b'userinput')
 
 def readFile(inFile):
     file = open(inFile, "r")
@@ -17,5 +18,7 @@ def readFile(inFile):
 if __name__ == "__main__":
     readFile("top-20-common-SSH-passwords.txt")
 
-userHexdigest = userPassword.hexdigest()
-print(userHexdigest)
+userHexdigest256 = userPassword256.hexdigest()
+print(userHexdigest256)
+userHexdigest512 = userPassword512.hexdigest()
+print(userHexdigest512)
