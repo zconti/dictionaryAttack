@@ -1,4 +1,5 @@
 import hashlib
+import time
 
 
 def readFile(inFile):
@@ -19,6 +20,7 @@ if __name__ == "__main__":
     wordList = readFile("top-20-common-SSH-passwords.txt")
     print(userPassword256)
     print("\n\n")
+    start_time = time.perf_counter()
     for word in wordList:
         word256 = hashlib.sha256()
         word256.update(b'word')
@@ -27,6 +29,8 @@ if __name__ == "__main__":
         if(word256 == userPassword256):
             print("\nFOUND\n")
 
+    end_time = time.perf_counter()
+    elapsed_time = end_time - start_time
     userHexdigest256 = userPassword256.hexdigest()
     print(userHexdigest256)
     userHexdigest512 = userPassword512.hexdigest()
