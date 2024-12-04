@@ -9,6 +9,19 @@ def readFile(inFile):
     print(wordsList)
     return wordsList
     
+def dictionary256(userPassword, wordList):
+    start_time = time.perf_counter()
+    for word in wordList:
+        word256 = hashlib.sha256()
+        word256.update(b'word')
+        print(word)
+        print(word256)
+        if(word256 == userPassword256):
+            print("\nFOUND\n")
+    end_time = time.perf_counter()
+    elapsed_time = end_time - start_time
+    return elapsed_time
+
 if __name__ == "__main__":
     userPassword256 = hashlib.sha256()
     userPassword512 = hashlib.sha512()
@@ -20,17 +33,10 @@ if __name__ == "__main__":
     wordList = readFile("top-20-common-SSH-passwords.txt")
     print(userPassword256)
     print("\n\n")
-    start_time = time.perf_counter()
-    for word in wordList:
-        word256 = hashlib.sha256()
-        word256.update(b'word')
-        print(word)
-        print(word256)
-        if(word256 == userPassword256):
-            print("\nFOUND\n")
 
-    end_time = time.perf_counter()
-    elapsed_time = end_time - start_time
+    time256 = dictionary256(userPassword256, wordList)
+
+    
     userHexdigest256 = userPassword256.hexdigest()
     print(userHexdigest256)
     userHexdigest512 = userPassword512.hexdigest()
