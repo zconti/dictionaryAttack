@@ -1,6 +1,6 @@
 import hashlib
 userPassword256 = hashlib.sha256()
-userPassword512 = hashlib.sha256()
+userPassword512 = hashlib.sha512()
 
 userinput = input("Enter Password\nRestrictions - strictly composed of one to three words from the dictionary\nYour Password: ")
 print("Password is " + userinput)
