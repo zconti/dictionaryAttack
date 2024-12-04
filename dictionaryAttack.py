@@ -1,11 +1,10 @@
 import hashlib
 from hashlib import blake2b
-h = blake2b()
-user2b = blake2b()
+m = hashlib.sha256()
 
-userinput = input("Enter Password: ")
+userinput = input("Enter Password\nRestrictions - strictly composed of one to three words from the dictionary\nYour Password: ")
 print("Password is " + userinput)
-user2b.update(b'userinput')
+m.update(b'userinput')
 
 def readFile(inFile):
     file = open(inFile, "r")
