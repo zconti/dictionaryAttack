@@ -19,6 +19,7 @@ def dictionary256(userPassword, wordList):
         print(wordHexdigest256)
         if(wordHexdigest256 == userPassword256):
             print("\nFOUND\n")
+            break
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
     return elapsed_time
