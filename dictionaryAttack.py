@@ -12,9 +12,10 @@ def readFile(inFile):
     words = file.read()
     wordsList = words.split("\n")
     print(wordsList)
+    return wordsList
     
 if __name__ == "__main__":
-    readFile("top-20-common-SSH-passwords.txt")
+    wordList = readFile("top-20-common-SSH-passwords.txt")
 
 userHexdigest256 = userPassword256.hexdigest()
 print(userHexdigest256)
