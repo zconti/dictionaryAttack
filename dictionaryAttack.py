@@ -9,18 +9,15 @@ def readFile(inFile):
     print(wordsList)
     return wordsList
     
-def dictionary256(userPassword, wordList):
+def dictionary256(userPassword256, wordList):
     start_time = time.perf_counter()
     for word in wordList:
-        word256 = hashlib.sha256()
-        word256.update(b'word')
-        print(word)
-        wordHexdigest256 = word256.hexdigest()
+        wordHexdigest256 = hashlib.sha256(word.encode('utf-8')).hexdigest()
         print(wordHexdigest256)
         if(wordHexdigest256 == userPassword256):
-            print("\nFOUND\n")
-            break
+            print("FOUND\n")
     end_time = time.perf_counter()
+    print("Done?")
     elapsed_time = end_time - start_time
     return elapsed_time
 
@@ -30,9 +27,9 @@ if __name__ == "__main__":
 
     userinput = input("Enter Password\nRestrictions - strictly composed of one to three words from the dictionary\nYour Password: ")
     print("Password is " + userinput)
-    userPassword256.update(b'userinput')
+    userPassword256.update(userinput.encode('utf-8'))
     userHexdigest256 = userPassword256.hexdigest()
-    userPassword512.update(b'userinput')
+    userPassword512.update(userinput.encode('utf-8'))
     userHexdigest512 = userPassword256.hexdigest()
     wordList = readFile("top-20-common-SSH-passwords.txt")
     print(userHexdigest256)
