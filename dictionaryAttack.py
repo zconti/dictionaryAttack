@@ -59,7 +59,7 @@ if __name__ == "__main__":
     userHexdigest256 = userPassword256.hexdigest()
     userPassword512.update(userinput.encode('utf-8'))
     userHexdigest512 = userPassword512.hexdigest()
-    wordList = readFile("top-20-common-SSH-passwords.txt")
+    wordList = readFile("200-worst-passwords.txt")
     print(userHexdigest256)
     print(userHexdigest512)
     print("\n\n")
@@ -77,14 +77,22 @@ if __name__ == "__main__":
     
     names = ['SHA256', 'SHA512']
     times = [time256[0], time512[0]]
+    guesses = [time256[1], time512[1]]
+    words = len(wordList)-1
+    
 
     plt.figure(figsize=(9, 3))
 
     plt.subplot(131)
     plt.bar(names, times)
-    #plt.subplot(132)
-    #plt.scatter(names, values)
-    #plt.subplot(133)
-    #plt.plot(names, values)
-    plt.suptitle('Categorical Plotting')
+    plt.ylabel('Time(sec)')
+    plt.title('Time Taken to Crack')
+    plt.subplot(132)
+    plt.bar(names, guesses)
+    plt.ylabel('Guesses')
+    plt.title('Number of Guesses')
+    plt.subplot(133)
+    plt.bar("Dictionary", words)
+    plt.ylabel('Words')
+    plt.title('Words in Dictionary')
     plt.savefig('plot.png')
