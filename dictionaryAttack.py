@@ -1,6 +1,6 @@
 import hashlib
 import time
-
+import matplotlib.pyplot as plt
 
 def readFile(inFile):
     file = open(inFile, "r")
@@ -56,3 +56,18 @@ if __name__ == "__main__":
     
     print(userHexdigest256)
     print(userHexdigest512)
+    
+    
+    fig, ax = plt.subplots()
+
+    types = ['SHA256', 'SHA256']
+    counts = [time256, time512]
+    bar_labels = ['SHA256', 'SHA512']
+    bar_colors = ['tab:red', 'tab:blue']
+
+    ax.bar(types, counts, label=bar_labels, color=bar_colors)
+
+    ax.set_ylabel('Time')
+    ax.set_title('Time to Decode by Encryption Type')
+
+    plt.show()
