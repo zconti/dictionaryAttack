@@ -17,6 +17,14 @@ def dictionary256(userPassword256, wordList):
         if wordHexdigest256 == userPassword256:
             print("FOUND\n")
             break
+    for word in wordList:
+        firstWord = word
+        for word in wordList:
+            comboWord = firstWord + word
+            wordHexdigest512 = hashlib.sha256(comboWord.encode('utf-8')).hexdigest()
+            if wordHexdigest512 == userPassword512:
+                print("FOUND\n")
+            break
     end_time256 = time.perf_counter()
     print("Done?")
     elapsed_time256 = end_time256 - start_time256
@@ -50,9 +58,9 @@ if __name__ == "__main__":
     print("\n\n")
 
     time256 = dictionary256(userHexdigest256, wordList)
-    time512 = dictionary256(userHexdigest512, wordList)
+    #time512 = dictionary256(userHexdigest512, wordList)
     print(time256)
-    print(time512)
+    #print(time512)
     
     print(userHexdigest256)
     print(userHexdigest512)
