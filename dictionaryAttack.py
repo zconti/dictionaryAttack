@@ -77,16 +77,16 @@ if __name__ == "__main__":
     print(userHexdigest512)
     
     
-    fig, ax = plt.subplots()
+    names = ['SHA256', 'SHA512']
+    times = [time256, time512]
 
-    types = ['SHA256', 'SHA256']
-    counts = [time256, time512]
-    bar_labels = ['SHA256', 'SHA512']
-    bar_colors = ['tab:red', 'tab:blue']
+    plt.figure(figsize=(9, 3))
 
-    ax.bar(types, counts, label=bar_labels, color=bar_colors)
-
-    ax.set_ylabel('Time')
-    ax.set_title('Time to Decode by Encryption Type')
-
-    plt.show()
+    plt.subplot(131)
+    plt.bar(names, times)
+    #plt.subplot(132)
+    #plt.scatter(names, values)
+    #plt.subplot(133)
+    #plt.plot(names, values)
+    plt.suptitle('Categorical Plotting')
+    plt.savefig('plot.png')
