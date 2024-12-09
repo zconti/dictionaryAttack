@@ -10,20 +10,14 @@ def readFile(inFile):
     return wordsList
     
 def dictionary256(userPassword256, wordList):
+    counter = 0
     start_time256 = time.perf_counter()
-    """
-    for word in wordList:
-        wordHexdigest256 = hashlib.sha256(word.encode('utf-8')).hexdigest()
-        #print(wordHexdigest256)
-        if wordHexdigest256 == userPassword256:
-            print("FOUND\n")
-            break
-        """
     for word in wordList:
         firstWord = word
         for word in wordList:
             secondWord = word
             for word in wordList:
+                counter += 1
                 comboWord = firstWord + secondWord + word
                 #print(comboWord)
                 wordHexdigest256 = hashlib.sha256(comboWord.encode('utf-8')).hexdigest()
@@ -32,16 +26,18 @@ def dictionary256(userPassword256, wordList):
                     print("FOUND\n")
                     end_time256 = time.perf_counter()
                     elapsed_time256 = end_time256 - start_time256
-                    return elapsed_time256
+                    return [elapsed_time256, counter]
     return 0
 
 def dictionary512(userPassword512, wordList):
+    counter = 0
     start_time512 = time.perf_counter()
     for word in wordList:
         firstWord = word
         for word in wordList:
             secondWord = word
             for word in wordList:
+                counter += 1
                 comboWord = firstWord + secondWord + word
                 #print(comboWord)
                 wordHexdigest512 = hashlib.sha512(comboWord.encode('utf-8')).hexdigest()
@@ -50,7 +46,7 @@ def dictionary512(userPassword512, wordList):
                     print("FOUND\n")
                     end_time512 = time.perf_counter()
                     elapsed_time512 = end_time512 - start_time512
-                    return elapsed_time512
+                    return [elapsed_time512, counter]
     return 0
 
 if __name__ == "__main__":
@@ -70,15 +66,17 @@ if __name__ == "__main__":
 
     time256 = dictionary256(userHexdigest256, wordList)
     time512 = dictionary512(userHexdigest512, wordList)
-    print(time256)
-    print(time512)
+    print(time256[0])
+    print(time512[0])
+    print(time256[1])
+    print(time512[1])
     
     print(userHexdigest256)
     print(userHexdigest512)
     
     
     names = ['SHA256', 'SHA512']
-    times = [time256, time512]
+    times = [time256[0], time512[0]]
 
     plt.figure(figsize=(9, 3))
 
